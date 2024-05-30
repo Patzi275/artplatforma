@@ -1,0 +1,191 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+    --primary-color: #EA9D8C;
+    --primary-color-light: #FFDDD5;
+    --text-color: #333;
+    --green: #7CAF8B;
+
+    --a-size: 14rem;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f4f4;
+    color: var(--text-color);
+}
+
+.container {
+    width: 100%;
+    min-height: 100vh;
+    height: 100%;
+    display: flex;
+}
+
+.content {
+    flex: 1;
+    padding: 2rem 4rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    color: var(--primary-color);
+    font-weight: 600;
+    letter-spacing: 3px;
+    padding-bottom: 2rem;
+}
+
+.main {
+    flex: 1;
+    display: grid;
+    align-items: center;
+    height: max-content;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.main__left {
+    grid-column: 1 / 2;
+}
+
+.event__title {
+    font-size: 5.5rem;
+    line-height: .9;
+    margin-bottom: 1rem;
+}
+
+.event__description  {
+    font-size: 1.5rem;
+}
+
+.event__date {
+    margin-top: 3rem;
+    font-weight: bold;
+}
+
+.event__link {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    border: 3px solid var(--primary-color);
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: small;
+    transition: all 0.3s;
+}
+
+.event__link:hover {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: bold;
+}
+
+.workshop {
+    display: none;
+}
+
+.main__right {
+    grid-column: span 2;
+    height: 100%;
+}
+
+.main__right > div {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.a1 {
+    transform: translateY(-3rem);
+}
+
+.a1__bg {
+    position: relative;
+}
+
+.a1__dots {
+    --size: 14rem;
+    width: var(--size);
+    height: var(--size);
+    background: radial-gradient(circle, #99665b 25%, transparent 25%);
+    background-size: .75em .75em;
+    opacity: .2;
+}
+
+[class^="a1__circle"] {
+    position: absolute;
+    background-color: var(--primary-color-light);
+    border-radius: 50%;
+}
+
+.a1__circle1 {
+    --size: 8.5rem;
+    top: 0;
+    transform: translate(-25%, -50%);
+    width: var(--size);
+    height: var(--size);
+}
+
+.a1__circle2 {
+    --size: 5rem;
+    bottom: 0;
+    transform: translate(-150%, 60%);
+    width: var(--size);
+    height: var(--size);
+}
+
+.a1__circle3 {
+    --size: 1.75rem;
+    bottom: 0;
+    transform: translate(-8rem, 5rem);
+    width: var(--size);
+    height: var(--size);
+}
+
+.a1__rect1 {
+    --size: 7rem;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+    transform: translate(15%, 15%);
+    width: var(--size);
+    height: var(--size);
+    background-color: var(--green);
+}
+
+.a1__rect2 {
+    --size: 5rem;
+    position: absolute;
+    top: 50%;
+    transform: translate(-60%, -30%);
+    width: var(--size);
+    height: var(--size);;
+    background-color: #0001;
+}
+
+.a1__rect3 {
+    --size: 4rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: rotate(40deg) translate(-6rem, 0%);
+    width: var(--size);
+    height: calc(var(--size) * 6.5);
+    background-color: var(--primary-color-light);
+    opacity: .5;
+}
+
+.a1__man {
+    position: absolute;
+    transform: translateY(2rem) scaleX(-1);
+    height: 28rem;
+    width: auto;
+}
