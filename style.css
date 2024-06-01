@@ -5,8 +5,11 @@
     --primary-color-light: #FFDDD5;
     --text-color: #333;
     --green: #7CAF8B;
+    --mate-green: #d6dad799;
+    --gray: #b4b1b1;
+    --grey: #DCD6D6;
 
-    --a-size: 14rem;
+    --a-size: 16rem;
 }
 
 * {
@@ -19,20 +22,93 @@ body {
     font-family: 'Poppins', sans-serif;
     background-color: #f4f4f4;
     color: var(--text-color);
+    overflow-x: hidden;
 }
 
-.container {
+button {
+    appearance: none;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.containers > * {
+    position: absolute;
     width: 100%;
-    min-height: 100vh;
+    max-height: 100vh;
     height: 100%;
     display: flex;
 }
 
-.content {
-    flex: 1;
-    padding: 2rem 4rem;
+.menu-container {
+    background-color: #3335;
+}
+
+.sidebar {
+    position: relative;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1rem;
+    border-right: 1px solid var(--gray);
+    background-color: #f4f4f4;
+    z-index: 1;
+}
+
+.sidebar svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: var(--gray);
+}
+
+.menu-container .sidebar svg {
+    /* fill: black; */
+}
+
+.sidebar__menu-trigger {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu-container__bg {
+    --size: 0rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: var(--size);
+    height: var(--size);
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+}
+
+.sidebar__media-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar__media-list {
+    position: absolute;
+    gap: .5rem;
+    bottom: 2rem;
+}
+
+.menu-container .sidebar {
+    background-color: transparent;
+}
+
+.content {
+    position: relative;
+    flex: 1;
+    padding: 2rem 6rem;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    overflow-x: hidden;
 }
 
 .header {
@@ -47,11 +123,27 @@ body {
     display: grid;
     align-items: center;
     height: max-content;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .main__left {
     grid-column: 1 / 2;
+    position: relative;
+    height: 100%;
+}
+
+.event, .workshop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.event {
+    /* display: none; */
 }
 
 .event__title {
@@ -78,6 +170,7 @@ body {
     text-decoration: none;
     font-size: small;
     transition: all 0.3s;
+    cursor: pointer;
 }
 
 .event__link:hover {
@@ -87,7 +180,84 @@ body {
 }
 
 .workshop {
+    z-index: -1;
+}
+
+.workshop__title {
+    font-size: 4rem;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+}
+
+.workshop__title span {
+    white-space: nowrap;
+}
+
+.instructors__list {
+    position: relative;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    margin-bottom: 1rem;
+    gap: .4rem;
+    min-height: 14rem;
+}
+
+.instructor--lvl4 {
+    opacity: 0;
+    position: absolute;
+    margin-top: .4rem;
+}
+
+.instructor--lvl4.bottom {
+    bottom: 0;
     display: none;
+}
+
+.instructor--lvl3, .instructor--lvl4 {
+    font-size: .8rem;
+    opacity: .5;
+}
+
+.instructor--lvl2 {
+    font-size: .9rem;
+    opacity: .7;
+    font-weight: 500;
+}
+
+.instructor--lvl1 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    opacity: .85;
+}
+
+.instructor--active {
+    font-size: 1.5rem;
+    font-weight: bold;
+    background-color: var(--primary-color-light);
+    padding: .5rem 1rem;
+    margin: 0rem 0;
+    width: fit-content;
+    transform: translateX(-1rem);
+    text-align: left;
+}
+
+.instructor__role-container {
+    overflow: hidden;
+}
+
+.instructor__role {
+    padding-top: .4rem;
+    text-align: left;
+    display: none;
+}
+
+.instructor--active .instructor__role {
+    display: block;
+    font-size: .8rem;
+    font-weight: normal;
 }
 
 .main__right {
@@ -102,16 +272,16 @@ body {
     align-items: center;
 }
 
-.a1 {
-    transform: translateY(-3rem);
+.an {
+    transform: translateY(0rem);
 }
 
-.a1__bg {
+.an__bg {
     position: relative;
 }
 
 .a1__dots {
-    --size: 14rem;
+    --size: calc(var(--a-size) + 2rem);
     width: var(--size);
     height: var(--size);
     background: radial-gradient(circle, #99665b 25%, transparent 25%);
@@ -119,14 +289,15 @@ body {
     opacity: .2;
 }
 
-[class^="a1__circle"] {
+[class^="a1__circle"],
+[class^="a2__circle"] {
     position: absolute;
     background-color: var(--primary-color-light);
     border-radius: 50%;
 }
 
 .a1__circle1 {
-    --size: 8.5rem;
+    --size: calc(var(--a-size) / 1.64);
     top: 0;
     transform: translate(-25%, -50%);
     width: var(--size);
@@ -134,7 +305,7 @@ body {
 }
 
 .a1__circle2 {
-    --size: 5rem;
+    --size: calc(var(--a-size) / 3);
     bottom: 0;
     transform: translate(-150%, 60%);
     width: var(--size);
@@ -142,15 +313,15 @@ body {
 }
 
 .a1__circle3 {
-    --size: 1.75rem;
+    --size: calc(var(--a-size) / 8);
     bottom: 0;
-    transform: translate(-8rem, 5rem);
+    transform: translate(-450%, 300%);
     width: var(--size);
     height: var(--size);
 }
 
 .a1__rect1 {
-    --size: 7rem;
+    --size: calc(var(--a-size) / 2);
     position: absolute;
     bottom: 0;
     right: 0;
@@ -162,30 +333,121 @@ body {
 }
 
 .a1__rect2 {
-    --size: 5rem;
+    --size: calc(var(--a-size) / 3.5);
     position: absolute;
     top: 50%;
     transform: translate(-60%, -30%);
     width: var(--size);
     height: var(--size);;
-    background-color: #0001;
+    background-color: var(--grey);
 }
 
 .a1__rect3 {
-    --size: 4rem;
+    --size: calc(var(--a-size) / 3.5);
     position: absolute;
     top: 0;
     right: 0;
-    transform: rotate(40deg) translate(-6rem, 0%);
+    transform: rotate(40deg) translate(60%, -5%);
+    transform-origin: top right;
     width: var(--size);
-    height: calc(var(--size) * 6.5);
+    height: calc(var(--size) * 5.5);
     background-color: var(--primary-color-light);
     opacity: .5;
 }
 
 .a1__man {
     position: absolute;
-    transform: translateY(2rem) scaleX(-1);
-    height: 28rem;
+    transform: translateY(1rem) scaleX(-1);
+    transform-origin: 'bottom right';
+    height: 30rem;
     width: auto;
+}
+
+[class^="a2__"] {
+    opacity: 0;
+}
+
+.a2__circle1 {
+    --size: calc(var(--a-size) / 1.68);
+    top: 0;
+    transform: translate(-20%, -60%);
+    width: var(--size);
+    height: var(--size);
+}
+
+.a2__circle2 {
+    --size: calc(var(--a-size) / 3);
+    bottom: 0;
+    transform: translate(-40%, 40%);
+    width: var(--size);
+    height: var(--size);
+}
+
+.a2__rect1 {
+    --size: calc(var(--a-size) / 4);
+    position: absolute;
+    top: 50%;
+    transform: translate(50%, -30%);
+    width: var(--size);
+    height: var(--size);
+    background-color: var(--grey);
+}
+
+.a2__rect2 {
+    --size: calc(var(--a-size) / 6);
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(30%, -40%);
+    width: var(--size);
+    height: var(--size);
+    background-color: var(--grey);
+}
+
+.a2__rect3 {
+    --size: calc(var(--a-size) / 4);
+    position: absolute;
+    transform: rotate(-40deg) translate(-70%, 05%);
+    transform-origin: top right;
+    width: var(--size);
+    height: calc(var(--size) * 5);
+    background-color: var(--mate-green);
+    opacity: 1;
+}
+
+.a2__rect4 {
+    --size: calc(var(--a-size) / 4.5);
+    position: absolute;
+    transform: translate(150%, -30%) rotate(-40deg);
+    transform-origin: top right;
+    width: var(--size);
+    height: calc(var(--size) * 3);
+    background-color: var(--mate-green);
+    opacity: 1;
+}
+
+.a2__profile {
+    --size: calc(var(--a-size) / 1.6);
+    position: absolute;
+    top: 50%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    height: var(--size);
+    width: var(--size);
+    background-color: var(--primary-color);
+    opacity: 1;
+    overflow: hidden;
+}
+
+.a2__profile-container {
+    opacity: 1;
+    display: flex;
+}
+
+.a2__profile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(1);
 }
