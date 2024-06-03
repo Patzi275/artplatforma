@@ -41,20 +41,10 @@ button {
 }
 
 .container--menu {
+    --clip: 0;
     background-color: var(--primary-color);
-    /* animation: grow_circle_path 5s infinite alternate; */
-    /* clip-path: circle(0% at calc(1rem + 1.5rem/2) 50%); */
+    clip-path: circle(var(--clip) at calc(1rem + 1.5rem/2) 50%);
 }
-
-/* @keyframes grow_circle_path {
-    0% {
-        clip-path: circle(0% at calc(1rem + 1.5rem/2) 50%);
-    }
-    100% {
-        clip-path: circle(120vw at calc(1rem + 1.5rem/2) 50%);
-    }
-    
-} */
 
 .sidebar {
     position: relative;

@@ -12,6 +12,8 @@ const instructors = [
 let first_instructor = 0;
 
 const trigger = document.querySelector('.trigger');
+const nav_open_btn = document.querySelector('.container--main .sidebar__menu-trigger');
+const nav_close_btn = document.querySelector('.container--menu .sidebar__menu-trigger');
 const [instr_prev, instr_next] = document.querySelectorAll('.instructor--lvl1');
 const main_tl = gsap.timeline();
 
@@ -48,17 +50,28 @@ instr_next.addEventListener('click', () => {
     scroll_profiles_next();
 });
 
+nav_open_btn.addEventListener('click', () => {
+    open_menu();
+});
+
+nav_close_btn.addEventListener('click', () => {
+    document.querySelector('.workshop').style.zIndex = -1;
+    main_tl.progress(0);
+    main_tl.pause();
+    close_menu();
+});
+
 
 function init() {
     const a2__profile = document.querySelector('.a2__profile-container');
-    [instructors[instructors.length-1], ...instructors, instructors[0]].forEach((value, index) => {
+    [instructors[instructors.length - 1], ...instructors, instructors[0]].forEach((value, index) => {
         const img = document.createElement('img');
         const alt = value.name.split(' ').join('-').toLowerCase();
         img.src = `https://robohash.org/${alt}`;
         img.alt = alt;
         a2__profile.appendChild(img);
     });
-    
+
 }
 
 function a1_tl() {
@@ -156,7 +169,6 @@ function scroll_profiles_next() {
     });
     return tween;
 }
-
 
 function event_outro() {
     // A1 Left TimeLine
@@ -321,5 +333,58 @@ function instructors_prev_tl() {
             ease: 'power2.inOut'
         }, '0');
 
+    return tl;
+}
+
+function open_menu() {
+    const tl = gsap.timeline();
+    tl
+        .to('.container--menu', {
+            '--clip': '110vw',
+            duration: 2,
+            ease: 'power2.out'
+        })
+        .fromTo('.menu__left > *', {
+            x: -150,
+            opacity: 0,
+        }, {
+            x: 0,
+            opacity: 1,
+            duration: 1.5,
+            ease: 'power2.out',
+            stagger: {
+                from: 'center',
+                each: 0.05
+            }
+        }, '0')
+        .fromTo(['.menu__right', '.get-ticket-btn'], {
+            x: -150,
+            opacity: 0,
+        }, {
+            opacity: 1,
+            x: 0,
+            duration: 1.5,
+            ease: 'power2.out'
+        }, '<0.5');
+    return tl;
+}
+
+function close_menu() {
+    const tl = gsap.timeline();
+    tl
+        .fromTo(['.menu__left > *', '.menu__right', '.get-ticket-btn'], {
+            x: 0,
+            opacity: 1
+        }, {
+            x: -150,
+            opacity: 0,
+            duration: 1,
+            ease: 'power2.out'
+        })
+        .to('.container--menu', {
+            '--clip': '0rem',
+            duration: 1,
+            ease: 'power2.out'
+        }, '=-1');
     return tl;
 }
